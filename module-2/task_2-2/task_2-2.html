@@ -12,31 +12,31 @@
     <ol>
       <li>Where should you use constants, and where should you use variables? Can they all be constants?</li>
       <p>
-				[Replace this with you answer]
+				[Constants should be used for whenever you have a value of which you will not change later, as the value of a cosntant is persistent throughout the code. If you have a value that will change, you should use a variable. Not all values can be constants, as some values need to be changed throughout the code.]
 			</p>
       <li>How do parentheses affect the arithmetic outcome of an expression?</li>
       <p>
-				[Replace this with you answer]
+				[Parentheses affect the order of operations, the same way one calculates mathematical equations. In maths, parentheses are calculated first, then multiplication and division, and finally addition and subtraction.]
 			</p>
       <li>How do we limit floating-point numbers to a given number of decimals?</li>
       <p>
-				[Replace this with you answer]
+				[We can limit floating-point numbers using .toFixed(), of where the number of decimals is specified in the parentheses.]
 			</p>
       <li>How can we compare two floating-point values to see if they are equal (is 12.199999 the same as 12.2)?</li>
       <p>
-				[Replace this with you answer]
+				[By using .toFixed() on both values, and for example setting "2" in between the parentheses, we can compare the two values to see if they are equal, as it rounds the values to the specified number of decimals. In this case, both values would be rounded to 12.20, and thus be equal.]
 			</p>
       <li>What do comparison operators return, and how can we check if they are FALSE or TRUE?</li>
       <p>
-				[Replace this with you answer]
+				[They return a boolean value, which is either TRUE of FALSE. We can use an if-statement to check if they are TRUE or FALSE.]
 			</p>
       <li>How does the Math.random() function work, and what can it be used for?</li>
       <p>
-				[Replace this with you answer]
+				[It generates a random floating point number betwween 0 and 1, and can be used to for example generate dice rolls]
 			</p>
       <li>What is modulus (%), and when do we need this operator in mathematical operations?</li>
       <p>
-				[Replace this with you answer]
+				[Modulus is what remains after dividing two numbers. For example, 5 % 2 = 1, as 2 goes into 5 two times, with 1 remaining. It is useful for example when you want your script to check if a number is even or odd, as even numbers have 0 remaining when divided by 2, while odd numbers have 1 remaining.]
 			</p>
     </ol>
 		<script type="module" src="./task_2-2.mjs" defer></script>
