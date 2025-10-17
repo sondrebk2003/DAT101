@@ -37,6 +37,7 @@ printOut(newLine);
 
 printOut("--- Part 4 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+let forPrimes = [];
 function isPrimeNumber(num) {
   for (let i = 2; i * i <= num; i++ ) {
     if (num === 1) {return false};
@@ -46,23 +47,25 @@ function isPrimeNumber(num) {
 }
 for (let i = 2; i <= 200; i++) {
   if (isPrimeNumber(i) === true) {
-    printOut(i);
+    forPrimes.push(i);
   }
 }
+printOut(forPrimes.join(", "));
 
 let num = 2;
 let primes = [];
 while (num <= 200) {
   if (isPrimeNumber(num) === true) {
-    primes.push(num); //it was supposed to put all in a nice line :/
+    primes.push(num);
   }
   num++;
 }
-printOut(primes);
+printOut(primes.join(", "));
 printOut(newLine);
 
 printOut("--- Part 5 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+
 printOut("Replace this with you answer!");
 printOut(newLine);
 
