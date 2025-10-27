@@ -95,7 +95,8 @@ let gradeD = maxScore * 0.53;
 let gradeE = maxScore * 0.41;
 let gradeF = maxScore * 0.40;
 
-for let i = 0; i <= 5; i++) {
+for (let i = 0; i <= 5; i++) {
+  score = Math.floor(Math.random() * 236) + 1;
   if (score >= gradeA) {
     printOut(`Score: ${score} Grade: A`);
   } else if (score >= gradeB) {
@@ -113,7 +114,27 @@ for let i = 0; i <= 5; i++) {
 printOut(newLine);
 printOut("--- Part 7 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+const diceRolls = [];
+for (let i = 0; i < 6; i++) {
+  const roll = Math.floor(Math.random() * 6) + 1;
+  diceRolls.push(roll);
+}
+const counts = {};
+for (const roll of diceRolls) {
+  counts[roll] = (counts[roll] || 0) + 1;
+}
+printOut(`Dice rolls: ${diceRolls.join(", ")}`);
+printOut(counts);
+
+if (counts[1] === 6 || counts[2] === 6 || counts[3] === 6 || counts[4] === 6 || counts[5] === 6 || counts[6] === 6) {
+  printOut("Yatsy!");
+} else if (Object.values(counts).includes(4) && Object.values(counts).includes(2)) {
+  printOut("Tower!");
+} else if (Object.keys(counts).length === 3 && (Object.values(counts).includes(2) && Object.values(counts).every(v => v === 2))) {
+  printOut("Three pairs!");
+} else if (Object.values(counts).every(v => v === 1)) {
+  printOut("Full straight!");
+}
 printOut(newLine);
 
 printOut("--- Part 8 ----------------------------------------------------------------------------------------------");
