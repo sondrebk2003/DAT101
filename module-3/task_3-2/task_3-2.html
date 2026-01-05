@@ -11,20 +11,20 @@
     </div>
     <ol>
       <li>In part 1, is it possible to solve the problem using a single "for" loop?</li>
-      <p>[Write your answer here, and copy this for more answers]</p>
+      <p>Perhaps if a function is used with correct conditioning, it would be possible to make a function with a simple for loop, and then run the function twice with different parameters that would alter how it prints a line.</p>
       <li>In part 2, can we create what is known as an "infinite" loop within the condition of the "while" loop?
         Describe what would or would not be necessary to achieve this. Provide a thorough explanation of
         your answer.
       </li>
-      <p>[Write your answer here, and copy this for more answers]</p>
+      <p>I believe the easiest way to achieve an infinite loop using a while loop would be to write either while(true) or while(false), without ever changing the condition inside the loop. That way it would run infinitely. I accidentally did this in leetcode which was awkward</p>
       <li>Discuss briefly how quickly or slowly a computer might be able to compute this, considering the
       number of guesses and the time it takes. How does the program behave while it is guessing? Can
       the program perform other tasks concurrently?</li>
-      <p>[Write your answer here, and copy this for more answers]</p>
+      <p>Javascript is single-threaded, meaning it can only do one code at a time. However it has a non-blocking event loop, meaning we can write asynchronous code that would go into the call stack and run in between other lines. Because code runs so fast it can often look like multiple things are happening at once.</p>
       <li>Explain the relationship between rows and columns in nested "for" loops. Can we, for instance,
       change the order, considering rows to be innermost or columns to be innermost, or does this not
       matter?</li>
-      <p>[Write your answer here, and copy this for more answers]</p>
+      <p>I belive it is possible to change the relationships between rows and columns in nested for loops, but it would be most convenient to have the rows in the outer for loop, and the columns in the inner for loop.</p>
     </ol>
     <script type="module" src="./task_3-2.mjs" defer></script>
   </body>
