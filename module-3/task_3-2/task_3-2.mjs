@@ -98,17 +98,17 @@ let gradeF = maxScore * 0.40;
 for (let i = 0; i <= 5; i++) {
   score = Math.floor(Math.random() * 236) + 1;
   if (score >= gradeA) {
-    printOut(`Score: ${score} Grade: A`);
+    printOut(`Student ${i + 1} Score: ${score} Grade: A`);
   } else if (score >= gradeB) {
-    printOut(`Score: ${score} Grade: B`);
+    printOut(`Student ${i + 1} Score: ${score} Grade: B`);
   } else if (score >= gradeC) {
-    printOut(`Score: ${score} Grade: C`);
+    printOut(`Student ${i + 1} Score: ${score} Grade: C`);
   } else if (score >= gradeD) {
-    printOut(`Score: ${score} Grade: D`);
+    printOut(`Student ${i + 1} Score: ${score} Grade: D`);
   } else if (score >= gradeE) {
-    printOut(`Score: ${score} Grade: E`);
+    printOut(`Student ${i + 1} Score: ${score} Grade: E`);
   } else {
-    printOut(`Score: ${score} Grade: F`);
+    printOut(`Student ${i + 1} Score: ${score} Grade: F`);
   }
 }
 printOut(newLine);
