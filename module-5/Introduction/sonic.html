@@ -53,6 +53,7 @@
     const hero2 = new TSprite(spcvs, SpriteInfoList.sonic4, 0, 300);
     const hero3 = new TSprite(spcvs, SpriteInfoList.sonic1, 400, 400);
     const hero4 = new TSprite(spcvs, SpriteInfoList.sonic3, 600, 300);
+    const hero5 = new TSprite(spcvs, SpriteInfoList.sonic5, 500, 400);
 
     // Functions
 
@@ -61,6 +62,7 @@
       hero2.draw();
       hero3.draw();
       hero4.draw();
+      hero5.draw();
     }
 
     let dir = 1; // 1 = right, -1 = left
@@ -72,6 +74,9 @@
       if ((hero.x > cvs.width - hero.width) || (hero.x < 0 - hero.width && dir < 0)) {
         dir *= -1;
         hero.flipHorizontal();
+        //hero2.hidden = !hero2.hidden;
+        //hero3.hidden = !hero3.hidden;
+        //hero4.hidden = !hero4.hidden;
         if (hero.x < 0) {hero.x = 1}
       }
 
@@ -103,8 +108,28 @@
       // Start Animation
       setInterval(animate, 5);
     }
+
+    function onKeyDown(aEvent){
+      console.log(aEvent.code);
+      switch(aEvent.code){
+        case "ArrowUp":
+          hero5.y -= 15;
+          break;
+        case "ArrowRight":
+          hero5.x += 15;
+          break;
+        case "ArrowDown":
+          hero5.y += 15;
+          break;
+        case "ArrowLeft":
+          hero5.x -= 15;
+          break;
+      }
+    }
+
     // Main application
     spcvs.loadSpriteImage("sonic_sprite_sheet.png", sheetLoaded);
+    document.addEventListener("keydown", onKeyDown);
 
 
   </script>
