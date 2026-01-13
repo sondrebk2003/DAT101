@@ -5,9 +5,10 @@ export class TObstacle{
     #spUp;
     #spDown;
     constructor(aSpcvs, aSPI){
-        this.#spDown = new TSprite(aSpcvs, aSPI, 200, 150);
+        const x = 600;
+        this.#spDown = new TSprite(aSpcvs, aSPI, x, 250);
         this.#spDown.index = 2;
-        this.#spUp = new TSprite(aSpcvs, aSPI, 200, -200);
+        this.#spUp = new TSprite(aSpcvs, aSPI, x, -200);
         this.#spUp.index = 3;
     }
 
@@ -16,6 +17,7 @@ export class TObstacle{
         this.#spUp.draw();
     }
 
+    
     animate() {
         this.#spDown.x--;
         this.#spUp.x--;
