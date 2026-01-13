@@ -12,12 +12,17 @@ export class TObstacle{
         this.#spUp.index = 3;
     }
 
+    // Properties
+    get x() {
+        return this.#spDown.x;
+    }
+
     draw() {
         this.#spDown.draw();
         this.#spUp.draw();
     }
 
-    
+
     animate() {
         this.#spDown.x--;
         this.#spUp.x--;
