@@ -19,10 +19,10 @@ export class THero extends TSprite {
           this.rotation = this.#speed * 25; // tilt down based on speed  
         }
       }
-    }
+    } // end of animate
+
     flap(){
         this.#speed = -3.5;
         this.rotation = 0;
     }
 }
-  
