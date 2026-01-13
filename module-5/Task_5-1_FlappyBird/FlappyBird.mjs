@@ -34,16 +34,19 @@ const background = new TBackground(spcvs, SpriteInfoList);
 const hero = new THero(spcvs, SpriteInfoList.hero1);
 const obstacle = new TObstacle(spcvs, SpriteInfoList.obstacle);
 
+
 //--------------- Functions ----------------------------------------------//
 function animateGame() {
   hero.animate();
   background.animate();
+  obstacle.animate();
 }
 
 function drawGame() {
-  background.draw();
+  background.drawBackground();
   hero.draw();
   obstacle.draw();
+  background.drawGround();
 }
 
 function loadGame() {
@@ -57,7 +60,6 @@ function loadGame() {
 
   // Start animate engine
   setInterval(animateGame, 10);
-
 } // end of loadGame
 
 
