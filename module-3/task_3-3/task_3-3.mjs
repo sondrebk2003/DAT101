@@ -186,62 +186,77 @@ printOut(newLine);
 
 printOut("--- Part 9 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-let array1 = [1, 2];
-  let array2 = [3];
-  let sum1 = 0;
-  let sum2 = 0;
-  let characters = 0;
-  let safetySwitch = 0;
 
+let set1 = [1, 2];
+let set2 = [3];
+let sum1 = 0;
+let sum2 = 0;
+let set1FinalIndex = set1.length - 1;
+let set2FinalIndex = set2.length - 1;
 
-function weirdExpression() {
-  while(true) {
-    for (let i = 0; i < array1.length; i++) {
-      sum1 += array1[i];
-    }
-    for (let i = 0; i < array2.length; i++) {
-      sum2 += array2[i];
-    }
+function proveSaying(count) {
 
-    console.log("Sum1: " + sum1 + " Sum2: " + sum2);
-    if (sum1 == sum2) {
-      printOut(array1 + " = " + array2);
-    }
-
-    let nextNumber1 = array1.length + 1;
-    let nextNumber2 = array2.length + 1;
-
-    let highValue1 = array1[array1.length - 1];
-
-    array1.length = 0;
-    array2.length = 0;
-    sum1 = 0;
-    sum2 = 0;
-
-    for (let i = 0; i < nextNumber1 - 1; i++) {
-      array1.push(highValue1 + i+ 1);
+  // CHECKING IF ARRAYS ARE EQUAL
+  for (let i = 0; i < set1.length; i++) {
+    sum1 += set1[i]
   }
-    highValue1 = array1[array1.length - 1];
-    for (let i = 0; i < nextNumber2 - 1; i++) {
-      array2.push(highValue1 + i + 1);
+  // console.log("Sum 1 = " + sum1)
+  for (let i = 0; i < set2.length; i++) {
+    sum2 += set2[i]
   }
+  // console.log("Sum 2 = " + sum2)
 
-    characters = array1.length + array2.length;
+  if (sum1 == sum2) {
+  printOut(set1.join(" + ") + " = " + set2.join(" + "))
+  } else {
+    // console.log("ERROR: ARRAY 1 " + set1 + " IS NOT EQUAL TO ARRAY 2 " + set2);
+  }
+  let set1Extension = set1.length;
+  let set2Extension = set2.length;
 
-  safetySwitch++;
 
-    if (characters > 15) {
-      break;
-    }
-    if (safetySwitch > 15) {
-      break;
+  // UPDATES ARRAY 1 NUMBERS TO COUNT FROM HIGHEST ARRAY 2 NUMBERS, THEN ADDS A NEW INDEX
+
+  for (let i = 0; i < set1Extension; i++) {
+    if (i == 0) {
+      //console.log("Changing " + set1[i] + " to " + (set2[set2FinalIndex] + 1))
+      set1[i] = set2[set2FinalIndex] + 1;
+    } else {
+      //console.log("Changing " + set1[i] + " to " + (set1[i - 1] + 1))
+      set1[i] = set1[i - 1] + 1;
     }
   }
-  printOut("MATH IS HARD")
+  set1.push(set1[set1FinalIndex] + 1);
+  set1FinalIndex = set1.length - 1;
+  //console.log(set1);
+
+
+  // UPDATES ARRAY 2 NUMBERS TO COUNT FROM HIGHEST CHANGED ARRAY 1 NUMBER, THEN ADDS A NEW INDEX
+
+  for (let i = 0; i < set2Extension; i++) {
+    if (i == 0) {
+      //console.log("Changing " + set2[i] + " to " + (set1[set1FinalIndex] + 1))
+      set2[i] = set1[set1FinalIndex] + 1;
+    } else {
+      //console.log("Changing " + set2[i] + " to " + (set2[i-1] + 1))
+      set2[i] = set2[i-1] + 1;
+    }
+  }
+  set2.push(set2[set2FinalIndex] + 1)
+  set2FinalIndex = set2.length - 1;
+  //console.log(set2)
+
+  //CHECKS HOW MANY TIMES TO RERUN
+  if (count == 0) {
+    return
+  }
+
+  proveSaying(count - 1)
 }
 
-weirdExpression();
-printOut("Replace this with you answer!");
+proveSaying(10);
+
+printOut("Math is fun!");
 printOut(newLine);
 
 /* Task 10*/
