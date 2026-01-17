@@ -200,16 +200,13 @@ function proveSaying(count) {
   for (let i = 0; i < set1.length; i++) {
     sum1 += set1[i]
   }
-  // console.log("Sum 1 = " + sum1)
   for (let i = 0; i < set2.length; i++) {
     sum2 += set2[i]
   }
-  // console.log("Sum 2 = " + sum2)
 
   if (sum1 == sum2) {
   printOut(set1.join(" + ") + " = " + set2.join(" + "))
   } else {
-    // console.log("ERROR: ARRAY 1 " + set1 + " IS NOT EQUAL TO ARRAY 2 " + set2);
   }
   let set1Extension = set1.length;
   let set2Extension = set2.length;
@@ -219,44 +216,39 @@ function proveSaying(count) {
 
   for (let i = 0; i < set1Extension; i++) {
     if (i == 0) {
-      //console.log("Changing " + set1[i] + " to " + (set2[set2FinalIndex] + 1))
       set1[i] = set2[set2FinalIndex] + 1;
     } else {
-      //console.log("Changing " + set1[i] + " to " + (set1[i - 1] + 1))
       set1[i] = set1[i - 1] + 1;
     }
   }
   set1.push(set1[set1FinalIndex] + 1);
   set1FinalIndex = set1.length - 1;
-  //console.log(set1);
 
 
   // UPDATES ARRAY 2 NUMBERS TO COUNT FROM HIGHEST CHANGED ARRAY 1 NUMBER, THEN ADDS A NEW INDEX
 
   for (let i = 0; i < set2Extension; i++) {
     if (i == 0) {
-      //console.log("Changing " + set2[i] + " to " + (set1[set1FinalIndex] + 1))
       set2[i] = set1[set1FinalIndex] + 1;
     } else {
-      //console.log("Changing " + set2[i] + " to " + (set2[i-1] + 1))
       set2[i] = set2[i-1] + 1;
     }
   }
   set2.push(set2[set2FinalIndex] + 1)
   set2FinalIndex = set2.length - 1;
-  //console.log(set2)
 
   //CHECKS HOW MANY TIMES TO RERUN
-  if (count == 0) {
+  if (count <= set1.length + set2.length) {
     return
   }
 
-  proveSaying(count - 1)
+  proveSaying(count)
 }
 
-proveSaying(10);
+proveSaying(20);
 
 printOut("Math is fun!");
+printOut("(This can technically run forever, I did over 2000 lines to see if there were any bugs haha)")
 printOut(newLine);
 
 /* Task 10*/
