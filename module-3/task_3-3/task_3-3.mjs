@@ -3,50 +3,293 @@ import { printOut, newLine } from "../../common/script/utils.mjs";
 
 printOut("--- Part 1 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+function currentTime(print) {
+  const now = new Date();
+  if (print == true)  {
+    printOut(`Current time is: ${now.toLocaleString("no-NB", { timeZone: "Europe/Oslo" })}`);
+  }
+  return now
+}
+
+currentTime(true);
 printOut(newLine);
 
 printOut("--- Part 2 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+/*
+const theDate = new Date(2026, 5, 14, 0, 0, 0, 0)
+const timeLeft = theDate.getTime();
+
+function countdown() {
+  const currentDate = currentTime(false).getTime;
+  const timeRemaining = timeLeft - currentDate;
+
+  const seconds = Math.floor(( timeRemaining / 1000) % 60);
+  const minutes = Math.floor(( timeRemaining / 1000 / 60) % 60);
+  const hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24)
+  const days = Math.floor((total / (1000 * 60 * 60 * 24)))
+
+  printOut("It's " + days + " days, " + hours + " hours, " + minutes + " minutes, and " + seconds + "seconds until 2XK0")
+}
+
+countdown()
+*/
+
+
+printOut("I did not understand the assignment, but tried my best");
 printOut(newLine);
 
 printOut("--- Part 3 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+function calculateCircle(radius) {
+  printOut("Circle's Radius: " + radius);
+  const diameter = radius * 2;
+  printOut("Diameter: " + diameter);
+  const circumference = 2 * Math.PI * radius;
+  printOut("Circumference: " + circumference.toFixed(2));
+  const area = Math.PI * radius * radius;
+  printOut("Area: " + area.toFixed(2));
+}
+
+const funnyRandomNumberFromLike1to100 = Math.floor(Math.random() * 100) + 1;
+const funnyRandomNumberFromLike1to50 = Math.floor(Math.random() * 50) + 1;
+
+calculateCircle(funnyRandomNumberFromLike1to100);
 printOut(newLine);
 
 printOut("--- Part 4 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+function calculateRectangle(length, width) {
+  printOut("Rectangle's Length: " + length);
+  printOut("Rectangle's Width: " + width);
+  const circumference = 2 * (length + width);
+  printOut("Circumference: " + circumference);
+}
+
+calculateRectangle(funnyRandomNumberFromLike1to100, funnyRandomNumberFromLike1to100 / 2);
 printOut(newLine);
 
 printOut("--- Part 5 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+function convertTemperatureScales(typeFrom, typeTo, value) {
+  switch (typeFrom.toLowerCase()) {
+    case "celsius":
+      if (typeTo.toLowerCase() === "fahrenheit") {
+        printOut("Converting " + value + "°C to Fahrenheit:");
+        const fahrenheit = (value * 9) / 5 + 32;
+        printOut(fahrenheit.toFixed(0) + "°F");
+      } else if (typeTo.toLowerCase() === "kelvin") {
+        printOut("Converting " + value + "°C to Kelvin:");
+        const kelvin = value + 273.15;
+        printOut(kelvin.toFixed(0) + "K");
+      } else {
+        printOut("Invalid type, please choose fahrenheit or kelvin", typeTo);
+      }
+      break;
+    case "fahrenheit":
+      if (typeTo.toLowerCase() === "celsius") {
+        printOut("Converting " + value + "°F to Celsius:");
+        const celsius = (value - 32) * 5 / 9;
+        printOut(celsius.toFixed(0) + "°C");
+      } else if (typeTo.toLowerCase() === "kelvin") {
+        printOut("Converting " + value + "°F to Kelvin:");
+        const kelvin = (value - 32) * 5 / 9 + 273.15;
+        printOut(kelvin.toFixed(0) + "K");
+      } else {
+        printOut("Invalid type, please choose celsius or kelvin", typeTo);
+      }
+      break;
+    case "kelvin":
+      if (typeTo.toLowerCase() === "celsius") {
+        printOut("Converting " + value + "K to Celsius:");
+        const celsius = value - 273.15;
+        printOut(celsius.toFixed(0) + "°C");
+      } else if (typeTo.toLowerCase() === "fahrenheit") {
+        printOut("Converting " + value + "K to Fahrenheit:");
+        const fahrenheit = (value - 273.15) * 9 / 5 + 32;
+        printOut(fahrenheit.toFixed(0) + "°F");
+      } else {
+        printOut("Invalid type, please choose celsius or fahrenheit", typeTo);
+      }
+      break;
+    default:
+      console.error("Invalid temperature scale:", typeFrom);
+  }
+}
+convertTemperatureScales("Celsius", "Fahrenheit", funnyRandomNumberFromLike1to50);
+convertTemperatureScales("Fahrenheit", "Kelvin", funnyRandomNumberFromLike1to50);
+convertTemperatureScales("Kelvin", "Celsius", funnyRandomNumberFromLike1to50);
 printOut(newLine);
 
 printOut("--- Part 6 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+
+function VATlessPrice(priceWithVAT, productType) {
+  printOut("Price with VAT: " + priceWithVAT);
+    if (productType.toLowerCase() === "normal") {
+      printOut("Product type: Normal (25% VAT)");
+      const stage1 = priceWithVAT * 0.25;
+      const priceWithoutVATNormal = priceWithVAT - stage1;
+      printOut("Price without VAT: " + priceWithoutVATNormal.toFixed(2));
+    }
+    else if (productType.toLowerCase() === "food") {
+      printOut("Product type: Food (15% VAT)");
+      const stage1 = priceWithVAT * 0.15;
+      const priceWithoutVATFood = priceWithVAT - stage1;
+      printOut("Price without VAT: " + priceWithoutVATFood.toFixed(2));
+    }
+    else if (productType.toLowerCase() === "hotel" || productType.toLowerCase() === "transport" || productType.toLowerCase() === "cinema") {
+      printOut("Product type: Hotel, Transport or Cinema (10% VAT)");
+      const stage1 = priceWithVAT * 0.10;
+      const priceWithoutVATSpecial = priceWithVAT - stage1;
+      printOut("Price without VAT: " + priceWithoutVATSpecial.toFixed(2));
+  }  else {
+      printOut("Invalid product type:", productType);
+    }
+}
+const products = ["normal", "food", "hotel", "transport", "cinema"];
+products.forEach((products) => {
+  VATlessPrice(funnyRandomNumberFromLike1to100, products);
+});
+
 printOut("Replace this with you answer!");
 printOut(newLine);
 
 printOut("--- Part 7 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+function tsdFormula(speed, time, distance) {
+  if (speed === null) {
+    printOut("Calculating Speed:");
+    const calculatedSpeed = distance / time;
+    printOut("Speed: " + calculatedSpeed.toFixed(2) + " units/time");
+  } else if (time === null) {
+    printOut("Calculating Time:");
+    const calculatedTime = distance / speed;
+    printOut("Time: " + calculatedTime.toFixed(2) + " time units");
+  } else if (distance === null) {
+    printOut("Calculating Distance:");
+    const calculatedDistance = speed * time;
+    printOut("Distance: " + calculatedDistance.toFixed(2) + " units");
+  } else {
+    printOut("Please provide null for the variable you want to calculate.");
+  }
+}
+
+tsdFormula(null, 2, 100);
+tsdFormula(50, null, 200);
+tsdFormula(60, 3, null);
 printOut(newLine);
 
 printOut("--- Part 8 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+function enlargen(string, maxsize, character, direction) {
+  let result = string;
+  const paddingSize = maxsize - string.length;
+  if (paddingSize > 0) {
+    const padding = character.repeat(paddingSize);
+    if (direction == true) {
+      result = padding + string;
+    } else if (direction == false) {
+      result = string + padding;
+    } else {
+      printOut("Write true or false for direction! true = left, false = right. Because left is right!");
+      return;
+    }
+  }
+  printOut(result);
+}
+
+enlargen("YO", 30, "O", false);
+enlargen("O", 30, "N", true);
 printOut(newLine);
 
 printOut("--- Part 9 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+let set1 = [1, 2];
+let set2 = [3];
+let sum1 = 0;
+let sum2 = 0;
+let set1FinalIndex = set1.length - 1;
+let set2FinalIndex = set2.length - 1;
+
+function proveSaying(count) {
+
+  // CHECKING IF ARRAYS ARE EQUAL
+  for (let i = 0; i < set1.length; i++) {
+    sum1 += set1[i]
+  }
+  for (let i = 0; i < set2.length; i++) {
+    sum2 += set2[i]
+  }
+
+  if (sum1 == sum2) {
+  printOut(set1.join(" + ") + " = " + set2.join(" + "))
+  } else {
+  }
+  let set1Extension = set1.length;
+  let set2Extension = set2.length;
+
+
+  // UPDATES ARRAY 1 NUMBERS TO COUNT FROM HIGHEST ARRAY 2 NUMBERS, THEN ADDS A NEW INDEX
+
+  for (let i = 0; i < set1Extension; i++) {
+    if (i == 0) {
+      set1[i] = set2[set2FinalIndex] + 1;
+    } else {
+      set1[i] = set1[i - 1] + 1;
+    }
+  }
+  set1.push(set1[set1FinalIndex] + 1);
+  set1FinalIndex = set1.length - 1;
+
+
+  // UPDATES ARRAY 2 NUMBERS TO COUNT FROM HIGHEST CHANGED ARRAY 1 NUMBER, THEN ADDS A NEW INDEX
+
+  for (let i = 0; i < set2Extension; i++) {
+    if (i == 0) {
+      set2[i] = set1[set1FinalIndex] + 1;
+    } else {
+      set2[i] = set2[i-1] + 1;
+    }
+  }
+  set2.push(set2[set2FinalIndex] + 1)
+  set2FinalIndex = set2.length - 1;
+
+  //CHECKS HOW MANY TIMES TO RERUN
+  if (count <= set1.length + set2.length) {
+    return
+  }
+
+  proveSaying(count)
+}
+
+proveSaying(20);
+
+printOut("Math is fun!");
+printOut("(This can technically run forever, I did over 2000 lines to see if there were any bugs haha)")
 printOut(newLine);
 
-printOut("--- Part 10 ----------------------------------------------------------------------------------------------");
+/* Task 10*/
+printOut("--- Part 10 ---------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+function factorial(n) {
+  if (n <= 1) {
+    return 1;
+  } else {
+    return  n * factorial(n - 1);
+  }
+}
+
+printOut("Factorial of 5 is: " + factorial(5));
+printOut("Factorial of 10 is: " + factorial(10));
+
+factorial(5);
+factorial(10);
 printOut(newLine);
