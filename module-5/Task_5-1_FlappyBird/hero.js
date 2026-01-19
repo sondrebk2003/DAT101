@@ -1,5 +1,6 @@
 "use strict";
 import { TSprite } from "libSprite";
+import { EGameStatus } from "./FlappyBird.mjs";
 
 export class THero extends TSprite {
   #gravity;
@@ -7,7 +8,7 @@ export class THero extends TSprite {
   constructor(aSpcvs, aSPI) {
     super(aSpcvs, aSPI, 100, 100);
     this.animationSpeed = 20;
-    this.#gravity = 9.81 / 100;
+    this.#gravity = 9.81 / 80 ;
     this.#speed = 0;
   }
 
@@ -18,6 +19,9 @@ export class THero extends TSprite {
       if (this.rotation < 90) { // limit max rotation
         this.rotation = this.#speed * 25; // tilt down based on speed
       }
+    } else {
+      EGameStatus.state = EGameStatus.heroIsDead;
+      this.animationSpeed = 0;
     }
   }// End of animate
 
