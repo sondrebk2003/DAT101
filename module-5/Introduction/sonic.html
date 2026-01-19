@@ -28,8 +28,7 @@
   </body>
   <script type="module" defer>
     // Import libraries
-    import { TSpriteCanvas, TSprite } from "libSprite";
-
+      import { TSpriteCanvas, TSprite } from "libSprite";
 
     // Global variables
 
@@ -43,86 +42,71 @@
       sonic6: { x: 0, y: 575, width: 102, height: 125, count: 3},
       sonic7: { x: 0, y: 700, width: 102, height: 125, count: 2},
       sonic8: { x: 0, y: 825, width: 102, height: 125, count: 2},
-      sonic9: { x: 0, y: 950, width: 102, height: 125, count: 4}
+      sonic9: { x: 0, y: 955, width: 102, height: 140, count: 4}
     }
 
     const cvs = document.getElementById("cvs");
     const ctx = cvs.getContext("2d");
     const spcvs = new TSpriteCanvas(cvs);
-    const hero = new TSprite(spcvs, SpriteInfoList.sonic2, 0, 100);
-    const hero2 = new TSprite(spcvs, SpriteInfoList.sonic4, 0, 300);
-    const hero3 = new TSprite(spcvs, SpriteInfoList.sonic1, 400, 400);
-    const hero4 = new TSprite(spcvs, SpriteInfoList.sonic3, 600, 300);
-    const hero5 = new TSprite(spcvs, SpriteInfoList.sonic5, 500, 400);
+    const hero1 = new TSprite(spcvs, SpriteInfoList.sonic2, 0, 100);
+    const hero2 = new TSprite(spcvs, SpriteInfoList.sonic1, 100, 250);
+    const hero3 = new TSprite(spcvs, SpriteInfoList.sonic5, 300, 350);
+    const hero4 = new TSprite(spcvs, SpriteInfoList.sonic9, 500, 250);
 
     // Functions
 
     function drawCanvas(){
-      hero.draw();
+      // This is a high performance function
+      // Do not do any heavy calculation here
+
+      hero1.draw();
       hero2.draw();
       hero3.draw();
       hero4.draw();
-      hero5.draw();
     }
 
     let dir = 1; // 1 = right, -1 = left
-    let dir2 = 1;
-    let dir3 = 1;
-    let dir4 = 1;
     function animate(){
-      hero.x+=10 * dir;
-      if ((hero.x > cvs.width - hero.width) || (hero.x < 0 - hero.width && dir < 0)) {
+      hero1.x += 3 * dir;
+      console.log(hero1.x);
+      if((hero1.x > cvs.width - hero1.width) || ( hero1.x + hero1.width < 0 && dir < 0)){
         dir *= -1;
-        hero.flipHorizontal();
-        //hero2.hidden = !hero2.hidden;
-        //hero3.hidden = !hero3.hidden;
-        //hero4.hidden = !hero4.hidden;
-        if (hero.x < 0) {hero.x = 1}
-      }
+        hero1.flipHorizontal();
+        hero2.hidden = !hero2.hidden;
+        hero3.hidden = !hero3.hidden;
 
-      hero2.x+=12 * dir2;
-      hero2.y+=10 * dir3;
-      if ((hero2.x > cvs.width - hero2.width) || (hero2.x < 0 - hero2.width && dir2 < 0)) {
-        dir2 *= -1;
-        hero2.flipHorizontal();
-        if (hero2.x < 0) {hero2.x = 1}
       }
-      if (hero2.y >= cvs.height - hero2.height) {dir3*=-1} else if (hero2.y < 0) {dir3*=-1}
-
-      hero4.y += 20 * dir4;
-      hero4.rotation+= 8;
-      if (hero4.rotation > 358) {hero4.rotation = 0}
-      if (hero4.y >= cvs.height - hero4.height) {dir4*=-1} else if (hero4.y < 0) {dir4*=-1}
     }
-    function sheetLoaded() {
+
+    function sheetLoaded(){
       console.log("Sheet loaded");
       spcvs.showFramerate = true;
       spcvs.onDraw = drawCanvas;
-      hero.animationSpeed = 10;
+      hero1.animationSpeed = 20;
+      hero1.rotation = 0;
       hero2.animationSpeed = 10;
-      hero3.animationSpeed = 3;
-      hero.rotation = 0;
-      //hero.flipHorizontal();
-
-
-      // Start Animation
-      setInterval(animate, 5);
+      hero2.hidden = true;
+      hero3.animationSpeed = 15;
+      hero3.hidden = true;
+      hero4.animationSpeed = 15;
+      
+      // Start animation
+      setInterval(animate, 20);
     }
 
     function onKeyDown(aEvent){
-      console.log(aEvent.code);
       switch(aEvent.code){
         case "ArrowUp":
-          hero5.y -= 15;
+          hero4.y -= 5;
           break;
         case "ArrowRight":
-          hero5.x += 15;
+          hero4.x += 5;
           break;
         case "ArrowDown":
-          hero5.y += 15;
+          hero4.y += 5;
           break;
         case "ArrowLeft":
-          hero5.x -= 15;
+          hero4.x -= 5;
           break;
       }
     }
@@ -130,7 +114,6 @@
     // Main application
     spcvs.loadSpriteImage("sonic_sprite_sheet.png", sheetLoaded);
     document.addEventListener("keydown", onKeyDown);
-
 
   </script>
 </html>
