@@ -40,6 +40,7 @@ const baits = [];
 function spawnBait() {
   const bait = new TBait (spcvs, SpriteInfoList.food);
   baits.push(bait);
+  setTimeout(spawnBait, 500); 
 }
 
 function spawnObstacle(){
@@ -53,6 +54,10 @@ function animateGame(){
   hero.animate();
   if (EGameStatus.state == EGameStatus.gaming) {
     background.animate();
+    for (let i = 0; i < baits.length; i++) {
+      const bait = baits[i];
+      bait.animate()
+    }
     let deleteObstacle = false;
     for(let i = 0; i < obstacles.length; i++){
       const obstacle = obstacles[i];
