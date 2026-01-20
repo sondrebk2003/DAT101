@@ -24,4 +24,10 @@ export class TBait extends TSprite {
       this.translate(this.#speed, this.#wave.value);
     }
   }
-}
+
+  distanceTo(aPoint) {
+    const dx = Math.pow(this.center.x - aPoint.x, 2);
+    const dy = Math.pow(this.center.y - aPoint.y, 2);
+    return Math.sqrt(dx + dy)
+  }
+} // End of class TBait

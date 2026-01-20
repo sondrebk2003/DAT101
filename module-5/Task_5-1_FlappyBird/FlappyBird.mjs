@@ -31,7 +31,7 @@ const SpriteInfoList = {
 };
 
 export const EGameStatus = { idle: 0, gaming: 1, heroIsDead: 2, gameOver: 3, 
-  state: 1 };
+  state: 0 };
 const background = new TBackground(spcvs, SpriteInfoList);
 export const hero = new THero(spcvs, SpriteInfoList.hero1);
 const obstacles = [];
@@ -39,17 +39,21 @@ const baits = [];
 
 //--------------- Functions ----------------------------------------------//
 function spawnBait(){
-  const bait = new TBait(spcvs, SpriteInfoList.food);
-  baits.push(bait);
-  const nextTime = Math.ceil(Math.random() * 3) + 1;
-  setTimeout(spawnBait, nextTime * 1000);
+  if (EGameStatus == EGameStatus.gaming) {
+    const bait = new TBait(spcvs, SpriteInfoList.food);
+    baits.push(bait);
+    const nextTime = Math.ceil(Math.random() * 3) + 1;
+    setTimeout(spawnBait, nextTime * 1000);
+  }
 }
 
 function spawnObstacle() {
-  const obstacle = new TObstacle(spcvs, SpriteInfoList.obstacle);
-  obstacles.push(obstacle);
-  const nextTime = Math.ceil(Math.random() * 3) + 1;
-  setTimeout(spawnObstacle, nextTime * 1000);
+  if (EGameStatus.state === EGameStatus.gaming) {
+    const obstacle = new TObstacle(spcvs, SpriteInfoList.obstacle);
+    obstacles.push(obstacle);
+    const nextTime = Math.ceil(Math.random() * 3) + 1;
+    setTimeout(spawnObstacle, nextTime * 1000);
+  }
 }
 
 function animateGame() {
@@ -58,7 +62,7 @@ function animateGame() {
   for(let i = 0; i < baits.length; i++){
     const bait = baits[i];
     bait.animate();
-    if (bait.hasCollided(hero)) {
+    if (bait.distanceTo(hero.center) < 20) {
       eaten = i;
     }
   }
