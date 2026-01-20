@@ -54,10 +54,19 @@ function spawnObstacle() {
 
 function animateGame() {
   hero.animate();
+  let eaten = -1
   for(let i = 0; i < baits.length; i++){
     const bait = baits[i];
     bait.animate();
+    if (bait.hasCollided(hero)) {
+      eaten = i;
+    }
   }
+  if (eaten >= 0) {
+    console.log("Eaten!")
+    baits.splice(eaten, 1);
+  }
+
   if (EGameStatus.state === EGameStatus.gaming) {
     background.animate();
     let deleteObstacle = false;
