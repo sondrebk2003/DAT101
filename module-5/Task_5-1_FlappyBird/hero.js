@@ -2,11 +2,15 @@
 import { TSprite } from "libSprite";
 import { EGameStatus } from "./FlappyBird.mjs";
 import { TSineWave } from "lib2d";
+import { TSoundFile } from "libSound";
+
+const fnFood = "./Media/food.mp3"
 
 export class THero extends TSprite {
   #gravity;
   #speed;
   #wave;
+  #sfFood;
   constructor(aSpcvs, aSPI) {
     super(aSpcvs, aSPI, 100, 20);
     this.animationSpeed = 20;
@@ -15,6 +19,7 @@ export class THero extends TSprite {
     //this.debug = true;
     this.#wave = new TSineWave(1, 1);
     this.y += this.#wave.value;
+    this.#sfFood = null;
   }
 
   animate() {
@@ -40,5 +45,13 @@ export class THero extends TSprite {
   flap() {
     this.#speed = -3.5;
     this.rotation = 0;
+  }
+
+  eat() {
+    if (this.#sfFood == null) {
+      this.#sfFood = new TSoundFile(fnFood);
+      this.#sfFood.play();
+    }
+      this.#sfFood.play();
   }
 }

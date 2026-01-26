@@ -6,6 +6,7 @@ import { THero } from "./hero.js";
 import { TObstacle } from "./obstacle.js";
 import { TBait } from "./bait.js";
 import { TMenu } from "./menu.js";
+import { TSoundFile } from "libSound"
 
 //--------------- Objects and Variables ----------------------------------//
 const chkMuteSound = document.getElementById("chkMuteSound");
@@ -76,6 +77,7 @@ function animateGame() {
   if (eaten >= 0) {
     console.log("Eaten!");
     baits.splice(eaten, 1);
+    hero.eat();
   }
 
   if (EGameStatus.state === EGameStatus.gaming) {
