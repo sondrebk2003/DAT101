@@ -1,17 +1,19 @@
 "use strict";
 import { TSprite } from "libSprite";
 import { hero } from "./FlappyBird.mjs"
-import { EGameStatus } from "./FlappyBird.mjs"
+import { EGameStatus, menu } from "./FlappyBird.mjs"
+import { TSoundFile } from "libSound"
 
 const EasyFlyerGap = 150;
 const HardFlyerGap = 100;
 const MinimumProtrusion = 30;
-
+const fnGameOver = "./Media/gameOver.mp3";
 
 export class TObstacle{
   #spUp;
   #spDown;
   #spi;
+  #sfGameOver
   constructor(aSpcvs, aSPI){
     const x = 600;
     this.#spi = aSPI;
@@ -29,7 +31,7 @@ export class TObstacle{
       top -= adjustment;
       topWithGap = this.#spi.height + top + gap; // Recalculate topWithGap after adjustment
     }
-
+    this.#sfGameOver = null;
     this.#spDown = new TSprite(aSpcvs, aSPI, x, topWithGap);
     this.#spDown.index = 2;
     this.#spUp = new TSprite(aSpcvs, aSPI, x, top);
@@ -57,6 +59,16 @@ export class TObstacle{
       EGameStatus.state = EGameStatus.heroIsDead;
       hero.animationSpeed = 0;
       hero.flap(); // Last flap before DEATH!!
+      hero.dead();
+      menu.stopSound();
+      if (this.#sfGameOver == null) {
+        this.#sfGameOver = new TSoundFile(fnGameOver)
+        this.#sfGameOver.play();
+        console.log("Death Sound played")
+      } else {
+        this.#sfGameOver.stop();
+      }
+      this.#sfGameOver.play()
     }
   }
 

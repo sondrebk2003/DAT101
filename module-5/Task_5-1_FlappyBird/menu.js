@@ -22,6 +22,10 @@ export class TMenu{
     this.#sfRunning = null;
   }
 
+  stopSound() {
+    this.#sfRunning.stop();
+  }
+
   draw(){
     this.#spTitle.draw();
     this.#spPlayBtn.draw();
@@ -33,13 +37,13 @@ export class TMenu{
       setTimeout(() => {
       this.#spCountDown.value --;
       this.countDown()
-      }, 1000)
+      }, 1000);
     } else {
       startGame();
       this.#spCountDown.visible = false;
       this.#spTitle.hidden = true;
       this.#sfRunning = new TSoundFile(fnRunning)
-      // his.#sfRunning.play()
+      this.#sfRunning.play()
       }
   }
 
