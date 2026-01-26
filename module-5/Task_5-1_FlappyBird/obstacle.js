@@ -43,6 +43,10 @@ export class TObstacle{
     return this.#spDown.x;
   }
 
+  get width(){
+    return this.#spDown.width;
+  }
+
   draw(){
     this.#spDown.draw();
     this.#spUp.draw();
@@ -59,7 +63,6 @@ export class TObstacle{
       EGameStatus.state = EGameStatus.heroIsDead;
       hero.animationSpeed = 0;
       hero.flap(); // Last flap before DEATH!!
-      hero.dead();
       menu.stopSound();
       if (this.#sfGameOver == null) {
         this.#sfGameOver = new TSoundFile(fnGameOver)
