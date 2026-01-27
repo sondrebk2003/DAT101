@@ -1,6 +1,6 @@
 "use strict";
 import { TSpriteButton } from "libSprite";
-import { gameProps, EGameStatusType, spawnSequence } from "./SimonSays.mjs";
+import { gameProps, EGameStatusType, /*spawnSequence*/ } from "./SimonSays.mjs";
 
 export class TColorButton extends TSpriteButton {
   constructor(aSpriteCanvas, aSpriteInfo) {
