@@ -2,7 +2,7 @@
 //--------------- Objects and Variables ----------------------------------//
 import { TSpriteCanvas } from "libSprite";
 import { TGameBoard } from "./gameBoard.js";
-import { TColorButton } from "./colorButton.mjs";
+import { TColorButton } from "./colorButton.js";
 
 // prettier-ignore
 export const SpriteInfoList = {

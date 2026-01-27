@@ -1,3 +1,4 @@
+"use strict";
 import { TSprite } from "libSprite";
 
 export class TGameBoard extends TSprite {
