@@ -17,11 +17,7 @@ export const SpriteInfoList = {
 
 const cvs = document.getElementById("cvs");
 const spcvs = new TSpriteCanvas(cvs);
-const background = new TGameBoard(spcvs, SpriteInfoList.Background)
-const redButton = new TColorButton(spcvs, SpriteInfoList.ButtonRed)
-const blueButton = new TColorButton(spcvs, SpriteInfoList.ButtonBlue)
-const greenButton = new TColorButton(spcvs, SpriteInfoList.ButtonGreen)
-const yellowButton = new TColorButton(spcvs, SpriteInfoList.ButtonYellow)
+const background = new TGameBoard(spcvs, SpriteInfoList)
 export const EGameStatusType = { Idle: 0 };
 
 export const gameProps = {
@@ -34,14 +30,9 @@ function loadGame() {
   spcvs.onDraw = drawGame;
 }
 
-
 function drawGame() {
   // Always draw all game elements, just control their visibility with the visible property
-  background.draw()
-  redButton.draw()
-  blueButton.draw()
-  greenButton.draw()
-  yellowButton.draw()
+  background.draw();
 }
 
 
