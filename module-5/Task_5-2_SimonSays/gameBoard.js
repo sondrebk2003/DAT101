@@ -1,20 +1,24 @@
 "use strict";
 import { TSprite } from "libSprite";
 import { TColorButton } from "./colorButton.js";
-import { SpriteInfoList } from "./SimonSays.mjs"
+import { TPoint } from "lib2d";
 
 export class TGameBoard extends TSprite {
   #colorButtons
 
   constructor(aSpcvs, aSPI) {
     super(aSpcvs, aSPI.Background, 0, 0);
+    const center = new TPoint (
+      aSPI.Background.width / 2,
+      aSPI.Background.height / 2)
 
     this.#colorButtons = [
-      new TColorButton(aSpcvs, aSPI.ButtonRed),
-      new TColorButton(aSpcvs, aSPI.ButtonBlue),
-      new TColorButton(aSpcvs, aSPI.ButtonGreen),
-      new TColorButton(aSpcvs, aSPI.ButtonYellow)
+      new TColorButton(aSpcvs, aSPI.ButtonRed, center),
+      new TColorButton(aSpcvs, aSPI.ButtonBlue, center),
+      new TColorButton(aSpcvs, aSPI.ButtonGreen, center),
+      new TColorButton(aSpcvs, aSPI.ButtonYellow, center)
     ];
+    //this.#colorButtons[0].debug = true;
   }
 
   draw() {
