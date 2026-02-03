@@ -16,7 +16,7 @@ export class TBackground{
   }
 
   drawGround(){
-    this.#spriteGround.draw() ;
+    this.#spriteGround.draw();
   }
 
   animate(){
@@ -24,7 +24,7 @@ export class TBackground{
     if(x < 5){
       this.#spriteGround.x = 0;  
     }else{
-      this.#spriteGround.x-= 1.5;
+      this.#spriteGround.x--;
     }
   }
 }

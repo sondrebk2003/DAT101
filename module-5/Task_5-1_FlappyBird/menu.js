@@ -1,10 +1,10 @@
 "use strict";
-import { TSprite, TSpriteButton, TSpriteNumber } from "libSprite";
+import { TSprite, TSpriteButton, TSpriteNumber} from "libSprite";
 import { startGame } from "./FlappyBird.mjs";
 import { TSoundFile } from "libSound";
 
-const fnCountDown = "./Media/countDown.mp3"
-const fnRunning = "./Media/running.mp3"
+const fnCountDown = "./Media/countDown.mp3";
+const fnRunning = "./Media/running.mp3";
 
 export class TMenu{
   #spTitle;
@@ -17,21 +17,20 @@ export class TMenu{
     this.#spTitle = new TSprite(aSpcvs, aSPI.flappyBird, 200, 100);
     this.#spPlayBtn = new TSpriteButton(aSpcvs, aSPI.buttonPlay, 240, 180);
     this.#spPlayBtn.addEventListener("click", this.spPlayBtnClick.bind(this));
-    this.#spCountDown = new TSpriteNumber(aSpcvs, aSPI.numberBig, 280, 180);
+    this.#spCountDown = new TSpriteNumber(aSpcvs, aSPI.numberBig, 280, 190);
     this.#spCountDown.visible = false;
     this.#sfCountDown = null;
     this.#sfRunning = null;
-    this.#spGameScore = new TSpriteNumber(aSpcvs, aSPI.numberBig, 10, 10)
-    this.#spGameScore.alpha = 0.8;
+    this.#spGameScore = new TSpriteNumber(aSpcvs, aSPI.numberSmall, 10, 10);
+    this.#spGameScore.alpha = 0.5;
   }
 
-  stopSound() {
+  incGameScore(aScore){
+    this.#spGameScore.value += aScore;
+  }
+
+  stopSound(){
     this.#sfRunning.stop();
-  }
-
-  updateScore(aScore) {
-    this.#spGameScore.value+= aScore;
-    
   }
 
   draw(){
@@ -42,29 +41,27 @@ export class TMenu{
   }
 
   countDown(){
-    if (this.#spCountDown.value !== 0) {
-      setTimeout(() => {
-      this.#spCountDown.value --;
-      this.countDown()
-      }, 1000);
-    } else {
-      startGame();
+    this.#spCountDown.value--;
+    if(this.#spCountDown.value > 0){
+      setTimeout(this.countDown.bind(this), 1000);  
+    }else{
       this.#spCountDown.visible = false;
       this.#spTitle.hidden = true;
-      this.#sfRunning = new TSoundFile(fnRunning)
-      this.#sfRunning.play()
-      }
+      this.#sfRunning = new TSoundFile(fnRunning);
+      this.#sfRunning.play();
+      startGame();
+    }
+    
   }
-
 
   spPlayBtnClick(){
     console.log("Click!");
     this.#spPlayBtn.hidden = true;
     this.#spCountDown.visible = true;
     this.#spCountDown.value = 3;
-    this.countDown();
-    this.#sfCountDown = new TSoundFile(fnCountDown)
+    this.#sfCountDown = new TSoundFile(fnCountDown);
     this.#sfCountDown.play();
+    setTimeout(this.countDown.bind(this), 1000);
   }
 
 }

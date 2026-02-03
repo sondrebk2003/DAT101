@@ -6,7 +6,6 @@ import { THero } from "./hero.js";
 import { TObstacle } from "./obstacle.js";
 import { TBait } from "./bait.js";
 import { TMenu } from "./menu.js";
-import { TSoundFile } from "libSound"
 
 //--------------- Objects and Variables ----------------------------------//
 const chkMuteSound = document.getElementById("chkMuteSound");
@@ -32,7 +31,7 @@ const SpriteInfoList = {
   medal:        { x: 985 , y: 635 , width: 44   , height: 44  , count: 4  },
 };
 
-export const EGameStatus = { idle: 0, countdown: 1, gaming: 2, heroIsDead: 3, gameOver: 4, state: 0 };
+export const EGameStatus = { idle: 0, countDown: 1, gaming: 2, heroIsDead: 3, gameOver: 4, state: 0 };
 const background = new TBackground(spcvs, SpriteInfoList);
 export const hero = new THero(spcvs, SpriteInfoList.hero1);
 const obstacles = [];
@@ -87,16 +86,14 @@ function animateGame() {
     for (let i = 0; i < obstacles.length; i++) {
       const obstacle = obstacles[i];
       obstacle.animate();
-      if ((hero.x > obstacle.x - (obstacle.width / 2))) {
-        if (!obstaclePassed) {
-          menu.updateScore(1);
-          obstaclePassed = true;
-        }
-        
-      }
       if (obstacle.x < -50) {
         deleteObstacle = true;
         obstaclePassed = false;
+      }else if((obstacle.x + obstacle.width) < hero.x){
+        if(!obstaclePassed){
+          menu.incGameScore(1);
+          obstaclePassed = true;
+        }
       }
     }
     if (deleteObstacle) {
@@ -132,7 +129,6 @@ function loadGame() {
 
   //Start animate engine
   setInterval(animateGame, 10);
-  
 } // end of loadGame
 
 function onKeyDown(aEvent) {

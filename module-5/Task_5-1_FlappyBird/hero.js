@@ -20,7 +20,6 @@ export class THero extends TSprite {
     this.animationSpeed = 20;
     this.#gravity = 9.81 / 100;
     this.#speed = 0;
-    //this.debug = true;
     this.#wave = new TSineWave(1, 1);
     this.y += this.#wave.value;
     this.#sfFood = null;
@@ -28,9 +27,18 @@ export class THero extends TSprite {
     this.#sfGameOver = null;
   }
 
+  eat() {
+    if (this.#sfFood === null) {
+      this.#sfFood = new TSoundFile(fnFood);
+    } else {
+      this.#sfFood.stop();
+    }
+    this.#sfFood.play();
+  }
+
   animate() {
     const hasGravity = EGameStatus.state === EGameStatus.gaming || EGameStatus.state === EGameStatus.heroIsDead;
-    
+
     if (hasGravity) {
       if (this.y < 400 - this.height) {
         this.#speed += this.#gravity; // increase speed due to gravity
@@ -41,37 +49,23 @@ export class THero extends TSprite {
         }
       } else {
         EGameStatus.state = EGameStatus.gameOver;
-        this.animationSpeed = 0;
         menu.stopSound();
+        this.animationSpeed = 0;
         this.#sfGameOver = new TSoundFile(fnGameOver);
         this.#sfGameOver.play();
-        this.#sfHeroIsDead = new TSoundFile(fnHeroIsDead);
-        this.#sfHeroIsDead.play();
-        
       }
-    }else if(EGameStatus.state === EGameStatus.idle){
+    } else if (EGameStatus.state === EGameStatus.idle) {
       this.y += this.#wave.value;
     }
   } // End of animate
 
+  dead(){
+    this.#sfHeroIsDead = new TSoundFile(fnHeroIsDead);
+    this.#sfHeroIsDead.play();
+  }
+
   flap() {
     this.#speed = -3.5;
     this.rotation = 0;
-  }
-
-  eat() {
-    if (this.#sfFood == null) {
-      this.#sfFood = new TSoundFile(fnFood);
-      this.#sfFood.play();
-    } else {
-      this.#sfFood.stop();
-    }
-      this.#sfFood.play();
-  }
-
-  dead() {
-    console.log("hero.dead() function called")
-    this.#sfHeroIsDead = new TSoundFile(fnHeroIsDead);
-    this.#sfHeroIsDead.play();
   }
 }

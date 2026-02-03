@@ -1,19 +1,16 @@
 "use strict";
 import { TSprite } from "libSprite";
-import { hero } from "./FlappyBird.mjs"
-import { EGameStatus, menu } from "./FlappyBird.mjs"
-import { TSoundFile } from "libSound"
+import { hero, EGameStatus, menu } from "./FlappyBird.mjs";
 
 const EasyFlyerGap = 150;
 const HardFlyerGap = 100;
 const MinimumProtrusion = 30;
-const fnGameOver = "./Media/gameOver.mp3";
+
 
 export class TObstacle{
   #spUp;
   #spDown;
   #spi;
-  #sfGameOver
   constructor(aSpcvs, aSPI){
     const x = 600;
     this.#spi = aSPI;
@@ -31,7 +28,7 @@ export class TObstacle{
       top -= adjustment;
       topWithGap = this.#spi.height + top + gap; // Recalculate topWithGap after adjustment
     }
-    this.#sfGameOver = null;
+
     this.#spDown = new TSprite(aSpcvs, aSPI, x, topWithGap);
     this.#spDown.index = 2;
     this.#spUp = new TSprite(aSpcvs, aSPI, x, top);
@@ -54,24 +51,17 @@ export class TObstacle{
 
   
   animate(){
-    this.#spDown.x-= 1.5;
-    this.#spUp.x-= 1.5;
-    let hasCollided = hero.hasCollided(this.#spDown) || hero.hasCollided(this.#spUp)
+    this.#spDown.x--;
+    this.#spUp.x--;
+    let hasCollided = hero.hasCollided(this.#spDown) || hero.hasCollided(this.#spUp);
 
-    if (hasCollided) {
-      console.log("Collision detected, opinion rejected")
+    if(hasCollided){
+      console.log("Collision with Hero!");
       EGameStatus.state = EGameStatus.heroIsDead;
       hero.animationSpeed = 0;
-      hero.flap(); // Last flap before DEATH!!
       menu.stopSound();
-      if (this.#sfGameOver == null) {
-        this.#sfGameOver = new TSoundFile(fnGameOver)
-        this.#sfGameOver.play();
-        console.log("Death Sound played")
-      } else {
-        this.#sfGameOver.stop();
-      }
-      this.#sfGameOver.play()
+      hero.flap(); // Last flap of death!
+      hero.dead();
     }
   }
 
