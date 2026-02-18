@@ -4,95 +4,174 @@ import { printOut, newLine } from "../../common/script/utils.mjs";
 
 printOut("--- Part 1 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut(2 + 3 * (2 - 4) * 6);
+printOut(`
+Use JavaScript to calculate the following expression, ensuring the result is -34:
+2 + 3 * 2 - 4 * 6 
+Display both the original expression and the modified expression (with parentheses) along with their results on the HTML page.  
+`);
+const originalExpression = 2 + 3 * 2 - 4 * 6;
+const modifiedExpression = 2 + 3 * (2 - 4) * 6;
+printOut("Original expression 2 + 3 * 2 - 4 * 6 = " + originalExpression);
+printOut("Modified expression 2 + 3 * (2 - 4) * 6 = " + modifiedExpression);
 printOut(newLine);
 
 printOut("--- Part 2 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-let metres = 25;
-let centimetres = 34
-let totalMm = (metres * 1000) + (centimetres * 10);
-let inches = totalMm / 25.4;
-let result = inches.toFixed(2);
-printOut(result);
+printOut(`
+  Convert 25 metres and 34 centimeters to inches. An inch is 25.4 millimeters (maximum 2 decimal places in the answer).
+`);
+const millimeters = 25000 + 340;
+const inchPrMillimeters = 25.4;
+let sumPart2 = millimeters / inchPrMillimeters;
+sumPart2 = sumPart2.toFixed(2);
+printOut(`25 metres and 34 centimeters is ${sumPart2} inches`);
 printOut(newLine);
 
 printOut("--- Part 3 ----------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
-let days = 3;
-let hours = 12;
-let minutes = 14;
-let seconds = 45;
-let totalminutes = (days * 24 * 60) + (hours * 60) + minutes + (seconds / 60);
-printOut(totalminutes);
+printOut(`
+  Convert 3 days, 12 hours, 14 minutes, and 45 seconds to minutes. (Not allowed to use date objects). The task must be solved with primitives.
+`);
+const part3Days = 3, part3Hours = 14, part3Minutes = 14, part3Seconds = 34;
+let part3Answer = 
+  (part3Days * 24 * 60) +
+  (part3Hours * 60) + 
+  part3Minutes +
+  (part3Seconds / 60)
+part3Answer = part3Answer.toFixed(2);
+printOut("3 days, 12 hours, 14 minutes, and 45 seconds is " + part3Answer + "minutes");
 printOut(newLine);
 
 printOut("--- Part 4 ----------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
-let twototalminutes = 6322.52;
-let totaldays = twototalminutes / 60 / 24;
-let totalhours = twototalminutes / 60;
-let totalseconds = twototalminutes * 60;
-printOut("total days: " + totaldays.toFixed(2) + ", total hours: " + totalhours.toFixed(2) + ", total seconds: " + totalseconds.toFixed(2));
-printOut(newLine);
+printOut(`
+  Convert 6,322.52 minutes to days, hours, minutes, and seconds. (Not allowed to use date objects). The task must be solved with primitives.
+  `);
+const part4Minutes = 6322.52;
+let part4Rest = part4Minutes / (24 * 60);
+const part4Days = Math.floor(part4Rest);
+part4Rest = part4Rest - part4Days;
+part4Rest = part4Rest * 24;
+const part4Hours = Math.floor(part4Rest);
+part4Rest = part4Rest - part4Hours;
+part4Rest = part4Rest * 60;
+const part4Minute = Math.floor(part4Rest);
+part4Rest -= part4Minute;
+part4Rest *= 60;
+const part4Seconds = Math.floor(part4Rest);
+
+printOut("6,322.52 minutes is " + 
+  part4Days + " days, " + 
+  part4Hours + " hours, " +
+  part4Minute + " minutes, " +
+  part4Seconds + " seconds"
+
+);
+
+  printOut(newLine);
 
 printOut("--- Part 5 ----------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
-let NOK = 76;
-let USD = 8.6;
-let USDtoNOK = NOK / USD;
-let NOKtoUSD = USD / NOK;
-let totalUSD = 54;
-let totalNOK = 54 * USDtoNOK.toFixed(2);
-printOut("1 NOK = " + NOKtoUSD.toFixed(2) + " USD");
-printOut("1 USD = " + USDtoNOK.toFixed(2) + " NOK");
-printOut("54 USD = " + (54 * USDtoNOK.toFixed(2)).toFixed(2) + " NOK");
-printOut((54 * USDtoNOK.toFixed(2)).toFixed(2) + " NOK is 54 USD");
+printOut(`
+Convert 54 dollars to Norwegian kroner, and print the price for both: <br>
+NOK → USD and USD → NOK.<br>
+Use 76 NOK = 8.6 USD as the exchange rate.<br>
+The answer must be in whole "Kroner" and whole "dollars"<br>
+`);
+
+const NOKRate = 76 / 8.6
+let USD = 54;
+let NOK = USD * NOKRate;
+printOut("USD -> NOK = " + NOK.toFixed(2));
+const USDRate = 8.6 / 76;
+USD = NOK * USDRate;
+printOut("NOK -> USD = " + USD.toFixed(2));
+
+
 printOut(newLine);
 
 printOut("--- Part 6 ----------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
-let stupidexphilflashbacks = "There is much between heaven and earth that we do not understand";
-printOut(stupidexphilflashbacks);
-printOut("The length of the quote is " + stupidexphilflashbacks.length + " characters");
-printOut("The character at position 19 is " + stupidexphilflashbacks.charAt(19));
-printOut("The next 8 characters from position 35 is: " + stupidexphilflashbacks.substr(35, 8));
-printOut('The index at which the word "earth" starts is: ' + stupidexphilflashbacks.indexOf("earth"));
+printOut(`
+Create a variable that contains the following text:
+   "There is much between heaven and earth that we do not understand."
+ Print the number of characters in the text.
+  <ul>
+   <li>Print the character at position number 19.</li>
+   <li>Print the characters starting at position number 35 and 8 characters forward.</li>
+   <li>Print the index at which "earth" starts in the text.</li>
+  </ul>
+`);
+const part6Text = "There is much between heaven and earth that we do not understand.";
+printOut(part6Text);
+printOut("Number of characters: " + part6Text.length);
+printOut("Character at position 19: " + part6Text.charAt(19));
+printOut("Characters from position 35, 8 characters forward: " + part6Text.substring(35, 35 + 8));
+printOut("Index at which 'earth' starts: " + part6Text.indexOf("earth"));
+
 printOut(newLine);
 
 printOut("--- Part 7 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Is 5 greater than 3? " + (5 > 3));
-printOut("Is 7 greater than or equal to 7? " + (7 >= 7));
-printOut('Is "a" greater than "b"? ' + ("a" > "b"));
-printOut('Is "2500" less than "abcd"? ' + ("2500" < "abcd"));
-printOut('"arne" is not equal to "thomas"? ' + ("arne" != "thomas"));
-printOut("(2 equals 5) is this statement true? " + (2 == 5));
-printOut('("abcd" is greater than "bcd") is this statement true? ' + ("abcd" > "bcd"));
+printOut(`
+Comparison, print the values for the following expressions (evaluate whether the statements are true):
+<ul>
+ <li>Is 5 greater than 3?</li>
+ <li>Is 7 greater than or equal to 7?</li>
+<li>Is "a" greater than "b"?</li>
+<li>Is 7 greater than or equal to 7?</li>
+<li>Is "a" greater than "b"?</li>
+<li>Is "1" less than "a"?</li>
+<li>Is "2500" less than "abcd"?</li>
+<li>"arne" is not equal to "thomas".</li>
+<li>(2 equals 5) is this statement true?</li>
+<li>("abcd" is greater than "bcd") is this statement false?</li>
+</ul>
+`);
+printOut(`Is 5 greater than 3? : ${5 > 3}`);
+printOut(`Is 7 greater than or equal to 7? : ${7 >= 7}`);
+printOut(`Is "a" greater than "b"? : ${"a" > "b"}`);
+printOut(`Is "1" less than "a"? : ${"1" < "a"}`);
+printOut(`Is "2500" less than "abcd"? : ${"2500" < "abcd"}`);
+printOut(`"arne" is not equal to "thomas". : ${"arne" != "thomas"}`);
+printOut(`(2 equals 5) is this statement true? : ${(2 === 5) === true}`);
+printOut(`("abcd" is greater than "bcd") is this statement false? : ${("abcd" > "bcd") === false}`);
 printOut(newLine);
 
 printOut("--- Part 8 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-let text1 = "254"
-let number1 = Number(text1);
-let text2 = "57.23"
-let number2 = Number(text2);
-let text3 = "25 kroner"
-let number3 = parseInt(text3);
-printOut('"254" as a number is ' + number1);
-printOut('"57.23" as a number is ' + number2);
-printOut('"25 kroner" as a number is ' + number3);
+printOut(`
+Convert and print the following expressions:
+<ul>
+  <li>from text "254" to a number</li>
+  <li>from text "57.23" to a number</li>
+  <li>from text "25 kroner" to a number</li>
+</ul>  
+`);
+printOut("Convert and print the following expressions: using Number()");
+printOut(`From text "254" to a number: ${Number("254")}`);
+printOut(`From text "57.23" to a number: ${Number("57.23")}`);
+printOut(`From text "25 kroner" to a number: ${Number("25 kroner")}${newLine}`);
+
+printOut("Convert and print the following expressions: using parseInt() and parseFloat()");
+printOut(`From text "254" to a number: ${parseInt("254")}`);
+printOut(`From text "57.23" to a number: ${parseFloat("57.23")}`);
+printOut(`From text "25 kroner" to a number: ${parseInt("25 kroner")}`);
+
 printOut(newLine);
 
 printOut("--- Part 9 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-let r = Math.random() * 360;
-printOut("Here is a random number between 0 and 360: " + r.toFixed(2));
+printOut(`
+  Create a variable "r" and randomly generate a number from 1 to 360 (1 >= r <= 360).
+`);
+let r = Math.floor(Math.random() * 360) + 1;
+printOut("Random number between 1 and 360 using floor: " + r);
+printOut("Random number between 1 and 360 using ceil: " + (Math.ceil(Math.random() * 360)));
 printOut(newLine);
 
 /* Task 10*/
 printOut("--- Part 10 ---------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-days = 131;
-printOut("There are " + (days / 7).toFixed(0) + " weeks and " + (days % 7) + " days in " + days + " days.");
+printOut(`Use modulus (%) to calculate how many weeks and days are in 131 days.`);
+const totalDays = 131;
+const weeks = Math.floor(totalDays / 7);
+const days = totalDays % 7;
+printOut("131 days is " + weeks + " weeks and " + days + " days.");
 printOut(newLine);
