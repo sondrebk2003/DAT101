@@ -134,22 +134,28 @@ export class TPenShape extends TShape{
   #points;
   constructor(aX, aY){
     super(aX, aY)
+    console.log("created pen")
     this.#points = [];
+  }
+
+  addPos(aX, aY) {
+    const pos = new TPoint(aX, aY);
+    this.#points.push(pos);
   }
 
   draw(){
     ctxPaint.beginPath();
     ctxPaint.moveTo(this.posStart.x, this.posStart.y);
-    if(!this.posEnd){
-      this.#calcSize();
-    }
-    ctxPaint.rect(this.posStart.x, this.posStart.y, this.#width, this.#height)
-    ctxPaint.stroke();
-  }
 
-  #calcSize(){
-    this.#width = Math.abs(mousePos.x - this.posStart.x);
-    this.#height = Math.abs(mousePos.y - this.posStart.y);
+    for (let i = 0; i < this.#points.length; i++) {
+      const pos = this.#points[i];
+      ctxPaint.lineTo(pos.x, pos.y)
+    }
+
+    if(this.posEnd){
+      ctxPaint.lineTo(this.posEnd.x, this.posEnd.y);
+    }
+    ctxPaint.stroke()
   }
 
 
@@ -160,6 +166,9 @@ function updateMousePos(aEvent){
   const rect = cvsPaint.getBoundingClientRect();
   mousePos.x = Math.round(aEvent.clientX - rect.left);
   mousePos.y = Math.round(aEvent.clientY - rect.top);
+  if (shape !== null && shape.addPos) {
+    shape.addPos(mousePos.x, mousePos.y);
+  }
 }
 
 function mouseDown(aEvent){
@@ -177,6 +186,9 @@ function mouseDown(aEvent){
         break;
       case EShapeType.Rectangle:
         shape = new TRectangleShape(mousePos.x, mousePos.y);
+        break;
+      case EShapeType.Pen:
+        shape = new TPenShape(mousePos.x, mousePos.y);
     }
   }
 }
