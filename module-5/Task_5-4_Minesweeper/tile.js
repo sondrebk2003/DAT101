@@ -1,11 +1,30 @@
 "use strict";
 import { TSpriteButton } from "libSprite";
 import { TPoint } from "lib2d";
-import { gameLevel } from "./Minesweeper.mjs";
+import { gameLevel, gameInfo } from "./Minesweeper.mjs";
 
 const MineInfoColors = ["blue", "green", "red", "darkblue", "brown", "cyan", "black", "grey"];
 let tiles = [];
 const ctx = document.getElementById("cvs").getContext("2d");
+let gameOver = false;
+
+function setGameOver() {
+  gameOver = true;
+  gameInfo.setSmileyIndex(2);
+  for (let c = 0; c < gameLevel.Tiles.Col; c++) {
+    const cols = tiles[c];
+    for (let r = 0; r < gameLevel.Tiles.Row; r++) {
+      const tile = cols[r];
+      if (tile.isMine && tile.index === 3) {
+        tile.index = 7;
+      } else if (tile.isMine) {
+          tile.index = 5;
+      } else if (tile.index === 3) {
+        tile.index = 6;
+      }
+    }
+  }
+}
 
 export class TTile extends TSpriteButton {
   #mine;
@@ -89,32 +108,63 @@ export class TTile extends TSpriteButton {
     // Create an if test, for testing if right button is pressed
     // if index is 3 then set it to 0 and vice versa.
     console.log(aEvent.button);
-    if(aEvent.button === 1){
+    if (gameOver == true) {
+      return;
+    }
+    if (this.open) {
+      return;
+    }
+    if(aEvent.button === 0 && this.index !== 3){
       this.index = 1;
-    }else if (aEvent.button === 2){
+      gameInfo.setSmileyIndex(1);
+    } else if (aEvent.button === 2){
       this.index = 3 - this.index;
+      if (this.index === 3) {
+        if (gameInfo.flagCount > 0) {
+          gameInfo.flagCount--;
+        } else {
+          this.index = 0;
+        }
+      } else {
+        gameInfo.flagCount++;
+      }
     }
     super.onMouseDown(aEvent);
   }
 
   onMouseUp(aEvent) {
+    if (gameOver) {
+      return;
+    }
+
     if(aEvent.button === 2 || this.index === 3){
       return;
     }
+    gameInfo.setSmileyIndex(0);
     this.open = true;
     super.onMouseUp(aEvent);
   }
 
   onMouseLeave(aEvent) {
+    if (gameOver) {
+      return;
+    }
     if (this.index === 1) {
       this.index = 0;
+      gameInfo.setSmileyIndex(0)
       super.onMouseLeave(aEvent);
     }
   }
 
   set open(_aValue) {
+    if (gameOver) {
+      return;
+    }
+
     if (this.isMine) {
-      this.index = 5;
+      setGameOver();
+      this.index = 4;
+      // Game Over
     } else {
       this.index = 2;
     }

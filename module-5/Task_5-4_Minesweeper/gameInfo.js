@@ -22,7 +22,21 @@ export class TGameInfo {
     this.#rightNumber.digits = 3;
     pos.x = (aSpcvs.width / 2) - (aSPI.ButtonSmiley.width / 2)
     this.#smiley = new TSpriteButton(aSpcvs, aSPI.ButtonSmiley, pos.x, pos.y);
+    console.log(this.#smiley)
+    console.log(this.#smiley.spi.count)
     this.#hndTimer = setInterval(this.onTime.bind(this), 1000);
+  }
+
+  get flagCount() {
+    return this.#leftNumber.value
+  }
+
+  set flagCount(aValue) {
+    this.#leftNumber.value = aValue
+  }
+
+  setSmileyIndex(aValue) {
+    this.#smiley.index = aValue;
   }
 
   draw(){
