@@ -7,6 +7,7 @@ const MineInfoColors = ["blue", "green", "red", "darkblue", "brown", "cyan", "bl
 let tiles = [];
 const ctx = document.getElementById("cvs").getContext("2d");
 let gameOver = false;
+let tilesRemaining;
 
 function setGameOver() {
   gameOver = true;
@@ -25,6 +26,12 @@ function setGameOver() {
       }
     }
   }
+}
+
+function setGameWin() {
+  gameOver = true;
+  gameInfo.setSmileyIndex(4);
+  gameInfo.stopTimer();
 }
 
 export class TTile extends TSpriteButton {
@@ -157,6 +164,13 @@ export class TTile extends TSpriteButton {
     }
   }
 
+  onMouseMove(aEvent) {
+    if (this.open || gameOver) {
+      return;
+    }
+    super.onMouseMove(aEvent);
+  }
+
   set open(_aValue) {
     if (gameOver) {
       return;
@@ -168,6 +182,10 @@ export class TTile extends TSpriteButton {
       // Game Over
     } else {
       this.index = 2;
+      tilesRemaining--;
+      if (tilesRemaining == 5) {
+        setGameWin()
+      }
     }
     if (this.mineInfo === 0) {
       this.#getNeighbors();
@@ -203,11 +221,13 @@ export function createTiles(aSpcvs, aSPI) {
   const colCount = glTiles.Col;
   const rowCount = glTiles.Row;
   tiles = [];
+  tilesRemaining  = 0;
   for (let col = 0; col < colCount; col++) {
     const rows = [];
     for (let row = 0; row < rowCount; row++) {
       const newTile = new TTile(aSpcvs, aSPI, col, row);
       rows.push(newTile);
+      tilesRemaining++;
     }
     tiles.push(rows);
   }
