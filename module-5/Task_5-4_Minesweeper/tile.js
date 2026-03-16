@@ -11,6 +11,7 @@ let gameOver = false;
 function setGameOver() {
   gameOver = true;
   gameInfo.setSmileyIndex(2);
+  gameInfo.stopTimer();
   for (let c = 0; c < gameLevel.Tiles.Col; c++) {
     const cols = tiles[c];
     for (let r = 0; r < gameLevel.Tiles.Row; r++) {
@@ -196,10 +197,12 @@ export function createMines() {
 }
 
 export function createTiles(aSpcvs, aSPI) {
+  gameOver = false;
   console.log(gameLevel);
   const glTiles = gameLevel.Tiles;
   const colCount = glTiles.Col;
   const rowCount = glTiles.Row;
+  tiles = [];
   for (let col = 0; col < colCount; col++) {
     const rows = [];
     for (let row = 0; row < rowCount; row++) {

@@ -1,7 +1,7 @@
 "use strict";
 import { TSpriteButton, TSpriteNumber, ESpriteNumberJustifyType } from "libSprite";
 import { TPoint } from "lib2d";
-import { gameLevel } from "./Minesweeper.mjs";
+import { gameLevel, newGame } from "./Minesweeper.mjs";
 
 export class TGameInfo {
   #leftNumber;
@@ -25,6 +25,17 @@ export class TGameInfo {
     console.log(this.#smiley)
     console.log(this.#smiley.spi.count)
     this.#hndTimer = setInterval(this.onTime.bind(this), 1000);
+    this.#smiley.addEventListener("mousedown", this.#smileyMouseDown.bind(this));
+    this.#smiley.addEventListener("mouseup", this.#smileyMouseUp.bind(this));
+  }
+
+  #smileyMouseDown() {
+    this.#smiley.index++;
+  }
+
+  #smileyMouseUp() {
+    this.#smiley.index--;
+    newGame();
   }
 
   get flagCount() {
@@ -33,6 +44,11 @@ export class TGameInfo {
 
   set flagCount(aValue) {
     this.#leftNumber.value = aValue
+  }
+
+  stopTimer() {
+    clearInterval(this.#hndTimer);
+    this.#hndTimer = 0;
   }
 
   setSmileyIndex(aValue) {
