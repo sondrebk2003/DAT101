@@ -78,7 +78,6 @@ function createColorPickers() {
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
     const pos = MastermindBoard.ColorPicker[key];
-    console.log(pos)
     const newColorPicker = new TColorPicker(pos);
     newColorPicker.index = i;
     colorPickers.push(newColorPicker);
