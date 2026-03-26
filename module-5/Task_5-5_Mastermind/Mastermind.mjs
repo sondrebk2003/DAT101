@@ -29,11 +29,10 @@
 // We are bringing in the TSpriteCanvas from our custom libSprite engine.
 // This is the powerhouse that handles all our drawing and event listening! 🚂
 
-import { TSpriteCanvas } from "libSprite";
+import { TSprite, TSpriteCanvas } from "libSprite";
 import { TMenu } from "./menu.js";
 import { TColorPicker } from "./colorPicker.js";
 import { MastermindBoard } from "./MastermindBoard.mjs";
-
 // --------------------------------------------------------------------------------------------------------------------
 // 🗄️ 2. Variables, Constants, and Game Objects
 // --------------------------------------------------------------------------------------------------------------------
@@ -56,6 +55,7 @@ const cvs = document.getElementById("cvs");
 export const spcvs = new TSpriteCanvas(cvs);
 export let menu = null;
 export let colorPickers = [];
+export let computerAnswers = [];
 
 // --------------------------------------------------------------------------------------------------------------------
 // ⚙️ 3. Game Functions
@@ -69,8 +69,21 @@ export function newGame() {
   // TODO: Empty your tracking arrays (like player answers and color hints).
   // TODO: Generate a new secret code for the computer.
   // TODO: Create the draggable color picker pegs for the menu.
-  menu = new TMenu()
-  createColorPickers()
+  menu = new TMenu();
+  createColorPickers();
+  createComputerAnswers();
+}
+
+function createComputerAnswers() {
+  const colors = SpriteInfoList.ColorPicker.count;
+  for (let i = 0; i < 4; i++) {
+    const colorIndex = Math.floor(Math.random() * colors);
+    const x = MastermindBoard.ComputerAnswer[i].x;
+    const y = MastermindBoard.ComputerAnswer[i].y;
+    const spColor = new TSprite(spcvs, SpriteInfoList.ColorPicker, x, y);
+    spColor.index = colorIndex;
+    computerAnswers.push(spColor);
+  }
 }
 
 function createColorPickers() {
@@ -103,8 +116,16 @@ function drawGame() {
   // TODO: Loop through your arrays and call .draw() on your sprites!
 
   menu.drawBackground();
+  drawComputerAnswers();
   menu.draw();
   drawColorPickers();
+}
+
+function drawComputerAnswers(){
+  for(let i = 0; i < computerAnswers.length; i++){
+    const spColor = computerAnswers[i];
+    spColor.draw();
+  }
 }
 
 // --------------------------------------------------------------------------------------------------------------------
